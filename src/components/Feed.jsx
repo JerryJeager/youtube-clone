@@ -11,13 +11,13 @@ const Feed = () => {
     const [selectedCategory, setSelectedCategory] = useState('New')
     const [videos, setVideos] = useState([])
 
-    // useEffect(() => {
-    //     fetchFromAPI()
-    //     .then(data => {
-    //         setVideos(data.items)
-    //     })
+    useEffect(() => {
+        fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
+        .then(data => {
+            setVideos(data.items)
+        })
 
-    // }, [selectedCategory])
+    }, [selectedCategory])
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row"}}}>
@@ -28,7 +28,7 @@ const Feed = () => {
         </Typography>
        </Box>
 
-       <Box p={2} sx={{ overFlowY: 'auto', height: '90vh', flex: 2}}>
+       <Box p={2} sx={{ overFlowY: 'scroll', height: 'auto', flex: 2}}>
         <Typography variant='h4' fontWeight="bold" mb={2} sx={{color: 'white'}}>
             {selectedCategory} 
             <span style={{ color: "#f31503"}} > videos</span>
